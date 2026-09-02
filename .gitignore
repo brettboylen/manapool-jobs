@@ -1,0 +1,4 @@
+manapool-jobs
+.env
+*.log
+dist/
