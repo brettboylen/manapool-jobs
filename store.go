@@ -56,6 +56,9 @@ func (s *Store) Close() {
 }
 
 func (s *Store) migrate(ctx context.Context) error {
+	if _, err := s.pool.Exec(ctx, `CREATE SCHEMA IF NOT EXISTS mtg`); err != nil {
+		return err
+	}
 	_, err := s.pool.Exec(ctx, `
 		CREATE TABLE IF NOT EXISTS mtg.manapool_job_postings (
 			slug             TEXT PRIMARY KEY,
